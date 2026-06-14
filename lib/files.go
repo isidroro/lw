@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"fmt"
 	"strconv"
 )
 
@@ -11,7 +10,7 @@ type File struct {
 	Weight    int64 //bytes?
 }
 
-func PrintFile(f *File) {
+func PrintFile(f *File) string {
 	weightStr := strconv.FormatInt(f.Weight, 10)
-	fmt.Printf("%s", f.Name+f.Extension+" "+weightStr)
+	return f.Name + f.Extension + " " + weightStr
 }
