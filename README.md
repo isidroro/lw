@@ -9,8 +9,10 @@ From the command line: `lw <target>` to list files and weights from the `<target
 ### Sample output:
 lw mydir
 
+````
 mydir/
 main.go        1.2K
   lib/
     walk.go    800B
     files.go   400B
+
