@@ -52,7 +52,8 @@ func printNode(n *Node, prof int) {
 	indent := strings.Repeat("  ", prof)
 
 	if n.IsDir {
-		fmt.Printf("%s%s/\n", indent, n.Name)
+		fmt.Printf("%s%-20s %s\n", indent, n.Name+"/", formatSize(n.Size))
+		// fmt.Printf("%s%s/\n", indent, n.Name)
 	} else {
 		fmt.Printf("%s%-20s %s\n", indent, n.Name, formatSize(n.Size))
 	}
@@ -60,4 +61,21 @@ func printNode(n *Node, prof int) {
 	for _, child := range n.Children {
 		printNode(child, prof+1)
 	}
+}
+
+// para un directorio, se suman los pesos
+// de sus archivos hijos para obtener el total
+func computeDirSizes(n *Node) int64 {
+	// si no es un directorio
+	if !n.IsDir {
+		return n.Size
+	}
+
+	var total int64
+	for _, child := range n.Children {
+		total += computeDirSizes(child)
+	}
+
+	n.Size = total
+	return total
 }

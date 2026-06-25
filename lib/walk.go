@@ -3,6 +3,7 @@ package lib
 import (
 	"io/fs"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -67,5 +68,29 @@ func GetTree(baseRoute string) (*Node, error) {
 		}
 		return nil
 	})
+
+	// ordenar
+	sortChildren(root)
+	computeDirSizes(root)
+
 	return root, err
+}
+
+func sortChildren(n *Node) {
+	sort.Slice(n.Children, func(i, j int) bool {
+		a, b := n.Children[i], n.Children[j]
+		// primero directorios
+		if a.IsDir != b.IsDir {
+			return a.IsDir
+		}
+		// despues orden alfabetico
+		return a.Name < b.Name
+	})
+
+	// llamada recursiva
+	for _, child := range n.Children {
+		if child.IsDir {
+			sortChildren(child)
+		}
+	}
 }
