@@ -1,18 +1,26 @@
-# LW
+# lw
 
-### Description:
-Small CLI utility to list files and their sizes recursively in a target directory. Written in Go.
+CLI tool to list files and directories recursively with their sizes. Written in Go.
 
-### Use:
-From the command line: `lw <target>` to list files and weights from the `<target>` directory.
+Directories show the sum of all their contents. Entries are sorted with directories first, then files alphabetically.
 
-### Sample output:
-lw mydir
+## Usage
 
-````
-mydir/
-main.go        1.2K
-  lib/
-    walk.go    800B
-    files.go   400B
+```
+lw [dir]
+```
 
+- No argument: lists the current directory.
+- `.` or `..` or any path: resolves and lists that directory.
+
+## Sample output
+
+```
+lw src/
+
+src/                 12.4K
+  lib/               8.1K
+    files.go         4.2K
+    walk.go          3.9K
+  main.go            4.3K
+```
