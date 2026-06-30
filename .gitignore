@@ -2,3 +2,9 @@ test_files
 test
 NOTAS.txt
 TODO.txt
+
+*.exe
+*.dll
+
+/lw
+/bin/
